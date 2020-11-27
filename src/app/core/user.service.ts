@@ -25,9 +25,12 @@ export class UserService {
         var user = await this.afAuth.currentUser;
         if (user) {
           this.db.database.ref(user.uid).once('value').then(res => {
-              console.log(res.val())
+              if (res.val() === null) {
+              resolve({value: ''});
+              } else {
                 resolve(res.val());
-            }, err => reject(err))
+              }
+        }, err => reject(err))
         } else {
             reject("User not available")
         }
@@ -38,11 +41,9 @@ export class UserService {
     return new Promise<any>(async (resolve, reject) => {
       var user = await this.afAuth.currentUser;
       if (user) {
-        this.db.database.ref(user.uid).set({
-            value
-        }).then(res => {
+        this.db.database.ref(user.uid).set({ value }).then(res => {
             resolve(res);
-          }, err => reject(err))
+        }, err => reject(err))
       } else {
           reject("User not available")
       }
