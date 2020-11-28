@@ -13,12 +13,10 @@ import { UserService } from './core/user.service';
 import { HomeResolver } from './home/home.resolver';
 import { AuthGuard } from './core/auth.guard';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MathjaxComponent } from './mathjax/mathjax.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, HomeComponent, MathjaxComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,6 +26,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFireAuthModule,
   ],
   providers: [AuthService, UserService, HomeResolver, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
