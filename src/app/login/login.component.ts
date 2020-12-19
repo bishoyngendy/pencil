@@ -5,21 +5,14 @@ import { AuthService } from '../core/auth.service';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  title = 'login';
+  constructor(public authService: AuthService, private router: Router) {}
 
-  constructor(
-    public authService: AuthService,
-    private router: Router,
-  ) {
-  }
-
-  tryGoogleLogin(){
-    this.authService.doGoogleLogin()
-    .then(res => {
+  tryGoogleLogin() {
+    this.authService.loginWithGoogle().then(() => {
       this.router.navigate(['/home']);
-    })
+    });
   }
 }
